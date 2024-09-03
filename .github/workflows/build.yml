@@ -26,9 +26,9 @@ jobs:
 
         - name: Create Archive
           run: |
-            mkdir -p release/includes
+            mkdir -p release/include
             mkdir -p release/lib
-            cp -r include/* release/include
+            cp -r includes/* release/include
             cp build/*.a release/lib
             tar -czvf CContainer.tar.gz -C release .
           shell: bash
