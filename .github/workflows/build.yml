@@ -30,7 +30,7 @@ jobs:
             mkdir -p release/lib
             cp -r includes/* release/include
             cp build/*.a release/lib
-            tar -czvf CContainer.tar.gz -C release .
+            tar -czvf CContainer.tar.gz -C release 
           shell: bash
 
         - name: Upload artifact
