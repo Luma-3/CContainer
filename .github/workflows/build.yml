@@ -55,5 +55,3 @@ jobs:
             files: CContainer.tar.gz
             repository: ${{ github.repository }}
             token: ${{ secrets.ACTION_RELEASE }}
-
-			
