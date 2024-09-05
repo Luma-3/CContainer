@@ -5,17 +5,15 @@
 #include <cstack.h>
 #include <stdlib.h>
 
-
-stack *stack_init() { return (calloc(1, sizeof(struct cstack))); }
-
-void	stack_destroy(stack *s, void (*destructor)(void *))
+stack *stack_init()
 {
-	if (!s )
-	{
-		return ;
-	}
-	if (destructor != NULL)
-	{
+	return (calloc(1, sizeof(struct cstack)));
+}
+
+void stack_destroy(stack *s, void (*destructor)(void *))
+{
+	if (!s) return;
+	if (destructor != NULL) {
 		stack_clear(s, destructor);
 	}
 	free(s);
@@ -23,11 +21,9 @@ void	stack_destroy(stack *s, void (*destructor)(void *))
 
 int stack_push(stack *s, void *data)
 {
-	if (!s)
-		return -1;
+	if (!s) return -1;
 	struct cstack_node *node = calloc(1, sizeof(struct cstack_node));
-	if (!node)
-		return -1;
+	if (!node) return -1;
 	node->data = data;
 	node->next = s->head;
 	s->head = node;
@@ -37,8 +33,7 @@ int stack_push(stack *s, void *data)
 
 void *stack_pop(stack *s)
 {
-	if (!s || !s->head)
-		return NULL;
+	if (!s || !s->head) return NULL;
 	struct cstack_node *node = s->head;
 	s->head = node->next;
 	void *data = node->data;
@@ -49,32 +44,27 @@ void *stack_pop(stack *s)
 
 void *stack_peek(stack *s)
 {
-	if (!s || !s->head)
-		return NULL;
+	if (!s || !s->head) return NULL;
 	return s->head->data;
 }
 
 bool stack_is_empty(stack *s)
 {
-	if (!s || !s->head)
-		return false;
+	if (!s || !s->head) return false;
 	return s->size == 0;
 }
 
 size_t stack_size(stack *s)
 {
-	if (!s || !s->head)
-		return 0;
+	if (!s || !s->head) return 0;
 	return s->size;
 }
 
 void stack_clear(stack *s, void (*destructor)(void *))
 {
-	if (!s || !s->head)
-		return;
+	if (!s || !s->head) return;
 	struct cstack_node *node = s->head;
-	while (node)
-	{
+	while (node) {
 		struct cstack_node *next = node->next;
 		destructor(node->data);
 		free(node);
